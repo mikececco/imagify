@@ -1,3 +1,4 @@
+import MobileSideBar from '@/components/shared/MobileSideBar'
 import SideBar from '@/components/shared/SideBar'
 import React from 'react'
 
@@ -7,6 +8,7 @@ function Layout({children}: {children: React.ReactNode}) {
       {/* Sidebar */}
       <SideBar />
       {/* MobileNav */}
+      <MobileSideBar />
       <div className='root-container'>
         <div className='wrapper'>
           {children}
