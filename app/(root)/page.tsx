@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut } from '@clerk/nextjs'
 
 function Home() {
   return (
@@ -8,11 +8,11 @@ function Home() {
       </p>
       <SignedIn>
         {/* Mount the UserButton component */}
-        <UserButton />
+        {/* <UserButton /> */}
       </SignedIn>
       <SignedOut>
         {/* Signed out users get sign in button */}
-        <SignInButton />
+        {/* <SignInButton /> */}
       </SignedOut>
     </div>
   )
