@@ -3,17 +3,19 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
-import { SignedIn, UserButton } from "@clerk/nextjs"
+import { navLinks } from "@/constants"
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import { MenuIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Button } from "../ui/button"
 
 function MobileSideBar() {
+  const pathname = usePathname()
+
   return (
     <header className="header">
       <Link href='/' className="flex items-center gap-2 md:py-2">
@@ -26,17 +28,41 @@ function MobileSideBar() {
             <SheetTrigger>
               <MenuIcon />
             </SheetTrigger>
-            <SheetContent>
-              <SheetHeader>
-                <SheetTitle>Are you absolutely sure?</SheetTitle>
-                <SheetDescription>
-                  This action cannot be undone. This will permanently delete your account
-                  and remove your data from our servers.
-                </SheetDescription>
-              </SheetHeader>
+            <SheetContent className='sheet-content sm:w-64'>
+              <>
+                <Image src='/assets/images/logo-text.svg'
+                alt="logo" width={152} height={23} />
+              </>
+              <ul className="header-nav_elements">
+                {navLinks.map((link) => {
+                  const isActive = link.route === pathname
+
+                  return (
+                    <li
+                      key={link.route}
+                      className={`${
+                      isActive &&  'gradient-text'
+                      } p-18 flex whitespace-nowrap text-dark-700`}
+                    >
+                      <Link className="sidebar-link" href={link.route}>
+                        <Image src={link.icon} alt={link.label} height={24} width={24}/>
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                })}
+              </ul>
             </SheetContent>
           </Sheet>
         </SignedIn>
+
+        <SignedOut>
+          <Button asChild className="button bg-purple-gradient bg-cover">
+            <Link href='/sign-in'>
+              Sign in
+            </Link>
+          </Button>
+        </SignedOut>
 
       </nav>
     </header>
