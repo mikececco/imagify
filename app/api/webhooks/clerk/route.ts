@@ -8,7 +8,22 @@ const clerkClient = createClerkClient({ secretKey: process.env.CLERK_SECRET_KEY 
 
 import { createUser, deleteUser, updateUser } from "@/lib/actions/user.actions";
 
+export async function GET(req: Request) {
+  console.log('HELLO');
+
+  try {
+    const payload = await req.json();
+    console.log(payload);
+  } catch (error) {
+    console.error('Failed to parse JSON:', error);
+  }
+
+  return new Response("", { status: 200 });
+}
+
 export async function POST(req: Request) {
+  console.log('INTO WEBHOOOOOOOOOOOOOOOOk');
+
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
   const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET;
 
@@ -57,9 +72,12 @@ export async function POST(req: Request) {
   // Get the ID and type
   const { id } = evt.data;
   const eventType = evt.type;
+  console.log('Out of event');
 
   // CREATE
   if (eventType === "user.created") {
+    console.log('HELLLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
+
     const { id, email_addresses, image_url, first_name, last_name, username } = evt.data;
 
     const user = {
