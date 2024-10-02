@@ -15,8 +15,9 @@ import { defaultValues } from "@/constants"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { CustomField } from "./CustomField"
 
-const formSchema = z.object({
+export const formSchema = z.object({
   title: z.string(),
   aspectRatio: z.string().optional(),
   color: z.string().optional(),
@@ -48,23 +49,13 @@ function TransformationForm({ action, data = null }: TransformationFormProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
+        <CustomField
           control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Username</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
+          name="title"
+          formLabel="Image Title"
+          className="w-full"
+          render={({field}) => <Input {...field} className="input-field"/> }
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   )
