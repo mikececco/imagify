@@ -1,4 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 "use client"
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -115,7 +119,7 @@ function TransformationForm({ action, data = null, userId, type, creditBalance, 
             className="w-full"
             render={({field}) => (
               <Select
-                onValueChange={({value}) => {
+                onValueChange={(value) => {
                   onSelectFieldHandler(value, field.onChange)
                 }}
               >
